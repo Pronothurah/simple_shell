@@ -17,6 +17,7 @@ int main(__attribute__((__unused__)) int ac, char **av)
 	_av(av);
 	_print_line();
 	_print_command_line_to_av(text, delim);
+	_execute_a_program();
 
 	printf("\n");
 

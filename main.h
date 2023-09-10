@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
@@ -15,5 +16,6 @@ void _print_process_id_maximum_value(char *str);
 void _av(char **va);
 void _print_line(void);
 void _print_command_line_to_av(char *text, char *delimeter);
+void _execute_a_program(void);
 
 #endif /* MAIN_H */

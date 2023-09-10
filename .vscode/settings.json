@@ -5,6 +5,8 @@
     "stdlib.h": "c",
     "stddef.h": "c",
     "variadic_functions.h": "c",
-    "unistd.h": "c"
+    "unistd.h": "c",
+    "wait.h": "c",
+    "features.h": "c"
   },
 }
