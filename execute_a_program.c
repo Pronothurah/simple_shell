@@ -22,13 +22,14 @@ void _execute_a_program(void)
 
     if (child_pid == 0)
     {
+      sleep(1);
+
       my_pid = getpid();
       printf("Parent: (%u), Child: (%u)\n", _getppid(), my_pid);
       r = execve(a[0], a, NULL);
 
       if (r == -1)
         exit(-1);
-      sleep(1);
     }
     else
     {

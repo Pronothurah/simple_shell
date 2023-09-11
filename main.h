@@ -17,5 +17,6 @@ void _av(char **va);
 void _print_line(void);
 void _print_command_line_to_av(char *text, char *delimeter);
 void _execute_a_program(void);
+void _find_path(char *path);
 
 #endif /* MAIN_H */

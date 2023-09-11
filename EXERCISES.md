@@ -16,5 +16,8 @@ Write a program that prints "$ ", wait for the user to enter a command, prints i
 Write a function that splits a string and returns an array of each word of the string.<br>
 #advanced: Write the function without strtok<br>
 
-5.fork + wait + execve<br>
+5.fork + wait + execve => (DONE) <br>
 Write a program that executes the command ls -l /tmp in 5 different child processes. Each child should be created by the same process (the father). Wait for a child to exit before creating a new child.<br>
+
+6. find a file in the PATH<br>
+Write a program that looks for files in the current PATH.<br>

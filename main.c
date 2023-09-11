@@ -18,6 +18,8 @@ int main(__attribute__((__unused__)) int ac, char **av)
 	_print_line();
 	_print_command_line_to_av(text, delim);
 	_execute_a_program();
+	_find_path("a.out");
+	_find_path("testmeyeah");
 
 	printf("\n");
 
