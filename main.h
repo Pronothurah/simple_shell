@@ -18,5 +18,8 @@ void _print_line(void);
 void _print_command_line_to_av(char *text, char *delimeter);
 void _execute_a_program(void);
 void _find_path(char *path);
+void _print_environ(void);
+char *_get_env(const char *name);
+void _print_directory_in_path(char *);
 
 #endif /* MAIN_H */

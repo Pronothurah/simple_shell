@@ -10,6 +10,7 @@ int main(__attribute__((__unused__)) int ac, char **av)
 	pid_t my_pid;
 	char text[] = "test-for-fun";
 	char delim[] = "-";
+	char *path;
 
 	my_pid = _getppid();
 	printf("%u\n", my_pid);
@@ -17,9 +18,12 @@ int main(__attribute__((__unused__)) int ac, char **av)
 	_av(av);
 	_print_line();
 	_print_command_line_to_av(text, delim);
-	_execute_a_program();
 	_find_path("a.out");
 	_find_path("testmeyeah");
+	/* _print_environ(); */
+	path = _get_env("PATH");
+	_print_directory_in_path(path);
+	/* _execute_a_program(); */
 
 	printf("\n");
 

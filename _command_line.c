@@ -7,7 +7,7 @@ void _print_command_line_to_av(char *text, char *delimeter)
   s = strtok(text, delimeter);
   while (s)
   {
-    printf("%s", s);
+    printf("%s\n", s);
     s = strtok(NULL, delimeter);
   }
 }
