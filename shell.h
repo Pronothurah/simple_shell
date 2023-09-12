@@ -12,5 +12,6 @@
 
 
 int _putchar(char c);
+void shell_prompt(void);
 
 #endif /* SHELL_H */

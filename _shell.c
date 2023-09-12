@@ -3,9 +3,9 @@
 /**
  * main - #include "main.h"
  *
- * Return: void
+ * Return: always 0
  */
-int main(void)
+int main(__attribute__((__unused__)) int argc, char **argv)
 {
 	char input[1024];
 	char* args[64];
