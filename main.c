@@ -11,6 +11,8 @@ int main(__attribute__((__unused__)) int ac, char **av)
 	char text[] = "test-for-fun";
 	char delim[] = "-";
 	char *path;
+	char **directories;
+	list_t *list;
 
 	my_pid = _getppid();
 	printf("%u\n", my_pid);
@@ -22,7 +24,10 @@ int main(__attribute__((__unused__)) int ac, char **av)
 	_find_path("testmeyeah");
 	/* _print_environ(); */
 	path = _get_env("PATH");
-	_print_directory_in_path(path);
+	directories = _get_directory_in_path(path);
+	list = create_linkedlist_from_path_directory(directories);
+	_print_directory_in_path(directories);
+	_print_linkedlist(list);
 	/* _execute_a_program(); */
 
 	printf("\n");
