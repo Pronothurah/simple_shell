@@ -20,17 +20,19 @@ void execute_command()
 		}
 
 		if (child_pid == 0)
+		{
 			sleep(1);
-	  
-		my_pid = getpid();
-		printf("Parent: (%u), Child: (%u)\n", _getppid(), my_pid);
-		r = execve(a[0], a, NULL);
-	  	if (r == -1)
-			exit(-1)
-	}
-    	else
-    	{
-	      	wait(&status);
-		child_pid = fork();
+			
+			my_pid = getpid();
+			printf("Parent: (%u), Child: (%u)\n", _getppid(), my_pid);
+			r = execve(a[0], a, NULL);
+			if (r == -1)
+				exit(-1)
+		}
+		else
+		{
+			wait(&status);
+			child_pid = fork();
+		}
 	}
 }
