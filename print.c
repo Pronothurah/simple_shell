@@ -10,8 +10,10 @@
 int _strlen(const char *str)
 {
 	int length = 0;
+
 	while (*str++)
 		length++;
+
 	return (length);
 }
 
@@ -22,7 +24,7 @@ int _strlen(const char *str)
  *
  * Return: void
  */
-void _print(const char* str)
+void _print(const char *str)
 {
 	write(STDOUT_FILENO, str, _strlen(str));
 }
