@@ -31,7 +31,7 @@ void _print_directory_in_path(char **);
 list_t *create_linkedlist_from_path_directory(char **);
 void _print_linkedlist(list_t *);
 char **parse_input(char *input, char *path, int len);
-char *get_path_from_environ(char *path, char *s);
+char *get_path_from_environ(const char *path, const char *s);
 int count_token(char *input, int len);
 
 #endif /* MAIN_H */

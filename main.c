@@ -56,29 +56,42 @@ char **parse_input(char *input, char *p, int len)
 	return (args);
 }
 
-char *get_path_from_environ(char *path, char *s)
+char *get_path_from_environ(const char *path, const char *s)
 {
 	char *s1;
 	char *p;
 	struct stat sb;
 	int r;
-	char *dest;
+	char *dest = NULL;
 
-	p = malloc(sizeof(char) * strlen(path));
-	if (p == NULL)
+	if (path == NULL || path[0] == '\0')
+	{
 		return (NULL);
+	}
 
-	strcpy(p, path);
+	p = strdup(path);
+	if (p == NULL)
+	{
+		return (NULL);
+	}
+
 	s1 = strtok(p, ":");
 	while (s1)
 	{
-		dest = malloc(sizeof(char) * strlen(s1) + 1);
+		size_t dest_len = strlen(s1) + strlen(s) + 2;
+		dest = (char *)malloc(dest_len);
 		if (dest == NULL)
-			break;
+		{
+			free(p);
+			return (NULL);
+		}
 
 		strcpy(dest, s1);
 		if (dest[strlen(dest) - 1] != '/')
+		{
 			strcat(dest, "/");
+		}
+
 		strcat(dest, s);
 		r = stat(dest, &sb);
 
@@ -88,8 +101,8 @@ char *get_path_from_environ(char *path, char *s)
 			return (dest);
 		}
 
-		s1 = strtok(NULL, ":");
 		free(dest);
+		s1 = strtok(NULL, ":");
 	}
 
 	free(p);
