@@ -28,11 +28,11 @@ int count_token(char *input, int len)
 char **parse_input(char *input, char *p, int len)
 {
 	char *s;
+	char *tmp = NULL;
 	int i;
 	char **args;
 	int c;
-
-	(void)p;
+	struct stat sb;
 
 	c = count_token(input, len);
 	if (c == -1)
@@ -43,12 +43,33 @@ char **parse_input(char *input, char *p, int len)
 		return (NULL);
 
 	s = strtok(input, " \n");
+	if (s[0] == '/')
+	{
+		if (stat(s, &sb) == -1)
+		{
+			args[0] = malloc(sizeof(char) * strlen(s));
+			args[0] = NULL;
+
+			return (args);
+		}
+	}
+	else
+	{
+		tmp = get_path_from_environ(p, s);
+	}
+
 	for (i = 0; s != NULL; i++)
 	{
 		args[i] = malloc(sizeof(char) * strlen(s));
 		strcpy(args[i], s);
-
+		printf("%s\n", s);
 		s = strtok(NULL, " \n");
+	}
+
+	if (tmp != NULL)
+	{
+		strcpy(args[0], tmp);
+		free(tmp);
 	}
 
 	args[i] = NULL;
@@ -56,45 +77,60 @@ char **parse_input(char *input, char *p, int len)
 	return (args);
 }
 
-char *get_path_from_environ(char *path, char *s)
+char *get_path_from_environ(const char *path, const char *s)
 {
 	char *s1;
+	char *copy_of_s;
 	char *p;
 	struct stat sb;
-	int r;
 	char *dest;
+	char *result;
 
 	p = malloc(sizeof(char) * strlen(path));
-	if (p == NULL)
+	copy_of_s = malloc(sizeof(char) * strlen(s));
+	if (path == NULL || path[0] == '\0' || p == NULL || copy_of_s == NULL)
+	{
 		return (NULL);
+	}
 
 	strcpy(p, path);
+	strcpy(copy_of_s, s);
 	s1 = strtok(p, ":");
-	while (s1)
+	while (s1 != NULL)
 	{
-		dest = malloc(sizeof(char) * strlen(s1) + 1);
+		size_t dest_len = strlen(s1) + strlen(copy_of_s) + 2;
+		dest = (char *)malloc(dest_len);
 		if (dest == NULL)
-			break;
+		{
+			free(dest);
+			continue;
+		}
 
 		strcpy(dest, s1);
 		if (dest[strlen(dest) - 1] != '/')
 			strcat(dest, "/");
-		strcat(dest, s);
-		r = stat(dest, &sb);
 
-		if (r != -1)
+		strcat(dest, copy_of_s);
+		if (stat(dest, &sb) != -1)
 		{
-			free(p);
-			return (dest);
+			result = (char *)malloc(sizeof(char) * strlen(dest));
+			if (result == NULL)
+			{
+				free(result);
+				continue;
+			}
+
+			strcpy(result, dest);
 		}
 
-		s1 = strtok(NULL, ":");
 		free(dest);
+		s1 = strtok(NULL, ":");
 	}
 
 	free(p);
+	free(copy_of_s);
 
-	return (NULL);
+	return (result);
 }
 
 /**
@@ -131,9 +167,7 @@ int main()
 		{
 			child_pid = fork();
 			if (child_pid == -1)
-			{
 				perror("Error:");
-			}
 
 			if (child_pid == 0)
 			{
