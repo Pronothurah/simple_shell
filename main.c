@@ -29,6 +29,7 @@ char **parse_input(char *input, char *p, int len)
 {
 	char *s;
 	char *tmp = NULL;
+	char *str;
 	int i;
 	char **args;
 	int c;
@@ -43,6 +44,12 @@ char **parse_input(char *input, char *p, int len)
 		return (NULL);
 
 	s = strtok(input, " \n");
+	str = malloc(sizeof(char) * strlen(s));
+	if (str == NULL)
+	{
+		free(str);
+	}
+
 	if (s[0] == '/')
 	{
 		if (stat(s, &sb) == -1)
@@ -52,6 +59,8 @@ char **parse_input(char *input, char *p, int len)
 
 			return (args);
 		}
+
+		str = NULL;
 	}
 	else if (strcmp(s, "exit") == 0)
 	{
@@ -62,21 +71,26 @@ char **parse_input(char *input, char *p, int len)
 	}
 	else
 	{
-		tmp = get_path_from_environ(p, s);
+		strcpy(str, s);
 	}
 
 	for (i = 0; s != NULL; i++)
 	{
 		args[i] = malloc(sizeof(char) * strlen(s));
 		strcpy(args[i], s);
-		printf("%s\n", s);
 		s = strtok(NULL, " \n");
 	}
 
-	if (tmp != NULL)
+	if (str != NULL)
 	{
-		strcpy(args[0], tmp);
-		free(tmp);
+		tmp = get_path_from_environ(p, str);
+		if (tmp != NULL)
+		{
+			strcpy(args[0], tmp);
+			free(tmp);
+		}
+
+		free(str);
 	}
 
 	args[i] = NULL;
