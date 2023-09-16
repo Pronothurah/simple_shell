@@ -25,7 +25,7 @@ int count_token(char *input, int len)
 	return (n);
 }
 
-char **parse_input(char *input, char *p, int len)
+char **parse_input(char *input, __attribute_maybe_unused__ char *p, int len)
 {
 	char *s;
 	char *tmp = NULL;
@@ -33,6 +33,7 @@ char **parse_input(char *input, char *p, int len)
 	char **args;
 	int c;
 	struct stat sb;
+	char *str;
 
 	c = count_token(input, len);
 	if (c == -1)
@@ -43,6 +44,12 @@ char **parse_input(char *input, char *p, int len)
 		return (NULL);
 
 	s = strtok(input, " \n");
+	str = malloc(sizeof(char) * strlen(s));
+	if (str == NULL)
+	{
+		free(str);
+	}
+
 	if (s[0] == '/')
 	{
 		if (stat(s, &sb) == -1)
@@ -62,21 +69,22 @@ char **parse_input(char *input, char *p, int len)
 	}
 	else
 	{
-		tmp = get_path_from_environ(p, s);
+		strcpy(str, s);
 	}
 
 	for (i = 0; s != NULL; i++)
 	{
 		args[i] = malloc(sizeof(char) * strlen(s));
 		strcpy(args[i], s);
-		printf("%s\n", s);
 		s = strtok(NULL, " \n");
 	}
 
+	tmp = get_path_from_environ(p, str);
 	if (tmp != NULL)
 	{
 		strcpy(args[0], tmp);
 		free(tmp);
+		free(str);
 	}
 
 	args[i] = NULL;
