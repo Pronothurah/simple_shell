@@ -53,6 +53,13 @@ char **parse_input(char *input, char *p, int len)
 			return (args);
 		}
 	}
+	else if (strcmp(s, "exit") == 0)
+	{
+		args[0] = malloc(sizeof(char) * strlen(s));
+		args[0] = "exit";
+
+		return (args);
+	}
 	else
 	{
 		tmp = get_path_from_environ(p, s);
@@ -158,10 +165,13 @@ int main()
 		}
 
 		args = parse_input(input, path, r);
-
 		if (args[0] == NULL)
 		{
-			printf("No such file or directory\n");
+			perror("No such file or directory\n");
+		}
+		else if (strcmp(args[0], "exit") == 0)
+		{
+			exit(0);
 		}
 		else
 		{
@@ -175,7 +185,7 @@ int main()
 
 				if (r == -1)
 				{
-					printf("No such file or directory\n");
+					perror("No such file or directory\n");
 				}
 			}
 			else

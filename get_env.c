@@ -19,6 +19,11 @@ char *_get_env(const char *name)
   for (i = 0; e[i] != NULL; i++)
   {
     copy = malloc(sizeof(char) * strlen(e[i]));
+    if (copy == NULL)
+    {
+      free(copy);
+      continue;
+    }
 
     strcpy(copy, e[i]);
     s = strtok(copy, "=");
