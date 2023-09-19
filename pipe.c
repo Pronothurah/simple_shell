@@ -4,10 +4,9 @@
  * execute_pipe_mode - implements the pipe operator
  * @fd: file descriptor from stdin
  * @path: path in global environment
- * 
+ *
  * Return: integer
-*/
-
+ */
 int execute_pipe_mode(int fd, char *path)
 {
 	char pipe[1024];

@@ -2,14 +2,12 @@
 
 /**
  * execute: executes arguments
- * 
  * @input: input string
  * @path: path of the global path argument
  * @length: length of the string
- * 
- * Return: integer 
-*/
-
+ *
+ * Return: integer
+ */
 int execute(char *input, char *path, int length)
 {
 	char **args;
@@ -25,7 +23,7 @@ int execute(char *input, char *path, int length)
 	}
 	else if (_strcmp(args[0], "exit") == 0)
 	{
-		__exit(input, path);
+		__exit(input, path, args);
 	}
 	else
 	{
@@ -44,6 +42,7 @@ int execute(char *input, char *path, int length)
 			if (WIFEXITED(status))
 			{
 				int exit_code = WEXITSTATUS(status);
+
 				flag = exit_code;
 			}
 		}

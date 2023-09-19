@@ -1,6 +1,11 @@
 #include "main.h"
 
-void catch_ctrlc()
+/**
+ * catch_ctrlc - catch ctrl + C signal
+ *
+ * Return: void
+ */
+void catch_ctrlc(__attribute__((__unused__)) int sig)
 {
 	printf("\n");
 	exit(0);
@@ -11,7 +16,7 @@ void catch_ctrlc()
  *
  * Return: Always 0.
  */
-int main()
+int main(void)
 {
 	char *input;
 	size_t len = 0;

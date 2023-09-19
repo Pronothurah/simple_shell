@@ -78,9 +78,9 @@ int _strcmp(const char *s1, const char *s2)
 /**
  * custom_strdup - duplicates a string
  * @str: input string
- * 
+ *
  * Returns: duplicate string
-*/
+ */
 char *custom_strdup(const char *str)
 {
 	char *duplicate;

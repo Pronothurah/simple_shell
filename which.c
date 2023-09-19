@@ -2,13 +2,11 @@
 
 /**
  * get_path_from_environ - gets path from global env
- * 
  * @path: path to the global env variable
  * @s: input string
- * 
+ *
  * Return: pointer to path
-*/
-
+ */
 char *get_path_from_environ(const char *path, const char *s)
 {
 	char *s1;
@@ -31,6 +29,7 @@ char *get_path_from_environ(const char *path, const char *s)
 	{
 		size_t dest_len = _strlen(s1) + _strlen(copy_of_s) + 2;
 		dest = (char *)malloc(dest_len);
+
 		if (dest == NULL)
 		{
 			free(dest);
