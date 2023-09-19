@@ -1,5 +1,14 @@
 #include "main.h"
 
+/**
+ * parse_input - splits the input
+ * @input: input string
+ * @p: path in global environment
+ * @len: length of string
+ * 
+ * Return: array of strings
+*/
+
 char **parse_input(char *input, char *p, __attribute__((__unused__)) int len)
 {
 	char *s;

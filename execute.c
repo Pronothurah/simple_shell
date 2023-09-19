@@ -1,5 +1,15 @@
 #include "main.h"
 
+/**
+ * execute: executes arguments
+ * 
+ * @input: input string
+ * @path: path of the global path argument
+ * @length: length of the string
+ * 
+ * Return: integer 
+*/
+
 int execute(char *input, char *path, int length)
 {
 	char **args;

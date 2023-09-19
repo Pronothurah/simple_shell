@@ -1,5 +1,14 @@
 #include "main.h"
 
+/**
+ * get_path_from_environ - gets path from global env
+ * 
+ * @path: path to the global env variable
+ * @s: input string
+ * 
+ * Return: pointer to path
+*/
+
 char *get_path_from_environ(const char *path, const char *s)
 {
 	char *s1;
