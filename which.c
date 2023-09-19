@@ -3,40 +3,45 @@
 /**
  * find_executable - find path from $PATH directories
  * @input: input string
- * @token: current directory
+ * @path: current $PATH env
  *
  * Return: pointer to a new allocated string or NULL
  */
-char *find_executable(char *input, char *token)
+char *find_executable(char *path, char *input)
 {
 	size_t dest_len;
-	char *dest, *result;
+	char *dest, *result = NULL, *s1;
 	struct stat sb;
 
-	dest_len = _strlen(token) + _strlen(input) + 2;
-	dest = (char *)malloc(dest_len);
-
-	if (dest == NULL)
+	s1 = strtok(path, ":");
+	while (s1 != NULL)
 	{
-		free(dest);
-		return (NULL);
-	}
+		dest_len = _strlen(s1) + _strlen(input) + 2;
+		dest = (char *)malloc(dest_len);
 
-	_strcpy(dest, token);
-	if (dest[_strlen(dest) - 1] != '/')
-		_strcat(dest, "/");
-
-	_strcat(dest, input);
-	if (stat(dest, &sb) != -1)
-	{
-		result = (char *)malloc(sizeof(char) * _strlen(dest) + 1);
-		if (result == NULL)
+		if (dest == NULL)
 		{
-			free(result);
+			free(dest);
 			return (NULL);
 		}
 
-		_strcpy(result, dest);
+		_strcpy(dest, s1);
+		if (dest[_strlen(dest) - 1] != '/')
+			_strcat(dest, "/");
+
+		_strcat(dest, input);
+		if (stat(dest, &sb) != -1)
+		{
+			result = (char *)malloc(sizeof(char) * _strlen(dest) + 1);
+			if (result == NULL)
+			{
+				free(result);
+				return (NULL);
+			}
+
+			_strcpy(result, dest);
+		}
+		s1 = strtok(NULL, ":");
 	}
 
 	free(dest);
@@ -52,7 +57,6 @@ char *find_executable(char *input, char *token)
  */
 char *get_path_from_environ(const char *path, const char *s)
 {
-	char *s1;
 	char *copy_of_s;
 	char *p;
 	char *result;
@@ -64,13 +68,7 @@ char *get_path_from_environ(const char *path, const char *s)
 
 	p = custom_strdup(path);
 	copy_of_s = custom_strdup(s);
-	s1 = strtok(p, ":");
-	result = NULL;
-	while (s1 != NULL)
-	{
-		result = find_executable(copy_of_s, s1);
-		s1 = strtok(NULL, ":");
-	}
+	result = find_executable(p, copy_of_s);
 
 	free(p);
 	free(copy_of_s);

@@ -10,7 +10,7 @@
  */
 void check_for_executable(char **args, char *str, char *path)
 {
-	char *tmp = NULL;
+	char *tmp;
 
 	if (str != NULL)
 	{
