@@ -23,6 +23,7 @@ char **parse_input(char *input, char *path, int len);
 int setup_arguments(char **args, char *input, char *delim, char *path);
 void check_for_executable(char **args, char *str, char *path);
 char *get_path_from_environ(const char *path, const char *s);
+char *find_executable(char *input, char *token);
 int count_token(char *input);
 char *custom_strdup(const char *str);
 void catch_ctrlc(int);

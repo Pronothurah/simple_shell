@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * execute: executes arguments
+ * execute - executes arguments
  * @input: input string
  * @path: path of the global path argument
  * @length: length of the string

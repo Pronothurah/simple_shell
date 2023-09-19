@@ -2,6 +2,7 @@
 
 /**
  * catch_ctrlc - catch ctrl + C signal
+ * @sig: signal value
  *
  * Return: void
  */
