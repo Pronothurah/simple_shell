@@ -29,7 +29,7 @@ int count_whitespace(char *str)
 
 /**
  * format_pipe - format input
- * @input: given input
+ * @pipe: given input
  * @tokens: array of strings pointer
  *
  * Return: integer
