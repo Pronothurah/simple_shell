@@ -37,5 +37,8 @@ int execute_normal_mode(char *path, char *av);
 int format_pipe(char *, char **);
 int count_whitespace(char *str);
 void error_1_output(char *name, char *cmd);
+int not_found_error(char *name, char *cmd);
+char *_strtok(char *src, char *delim);
+unsigned int is_delim(char c, char *delim);
 
 #endif /* MAIN_H */

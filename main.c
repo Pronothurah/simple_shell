@@ -15,6 +15,7 @@ void catch_ctrlc(__attribute__((__unused__)) int sig)
 /**
  * execute_normal_mode - interactive mode
  * @path: current $PATH env
+ * @av: argument vector
  *
  * Return: exit status (int)
  */
