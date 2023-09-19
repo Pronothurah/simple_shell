@@ -22,13 +22,14 @@ int execute_normal_mode(char *path)
 {
 	int flag = 0;
 	size_t len = 0;
-	int byteRead;
-	char *input;
+	int byteRead = 0;
+	char *input = NULL;
 
 	_print("($) ");
 	byteRead = getline(&input, &len, stdin);
 	if (byteRead == -1)
 	{
+		free(input);
 		printf("\n");
 		return (-1);
 	}
