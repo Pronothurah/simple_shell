@@ -8,7 +8,7 @@
  *
  * Return: integer
  */
-int execute(char *input, char *path, int length)
+int execute(char *input, char *path, int length, char *av)
 {
 	char **args;
 	pid_t child_pid;
@@ -18,8 +18,8 @@ int execute(char *input, char *path, int length)
 	args = parse_input(input, path, length);
 	if (args[0] == NULL)
 	{
-		flag = ENOENT;
-		perror("No such file or directory\n");
+		error_1_output(av, input);
+		return (127);
 	}
 	else if (_strcmp(args[0], "exit") == 0)
 	{
@@ -34,7 +34,10 @@ int execute(char *input, char *path, int length)
 		if (child_pid == 0)
 		{
 			if ((execve(args[0], args, __environ)) == -1)
-				perror("No such file or directory\n");
+			{
+				error_1_output(av, input);
+				return (127);
+			}
 		}
 		else
 		{

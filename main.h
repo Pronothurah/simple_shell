@@ -16,6 +16,7 @@ char *_get_env(const char *name);
 int _putchar(char c);
 int _strlen(const char *str);
 void _print(const char *str);
+void _print_error(const char *str);
 char *_strcpy(char *dest, const char *src);
 int _strcmp(const char *s1, const char *s2);
 char *_strcat(char *dest, const char *src);
@@ -30,9 +31,11 @@ char *custom_strdup(const char *str);
 void catch_ctrlc(int);
 void free_args(char **args);
 void __exit(char *input, char *path, char **args);
-int execute(char *input, char *path, int length);
-int execute_pipe_mode(int fd, char *path);
+int execute(char *input, char *path, int length, char *av);
+int execute_pipe_mode(int fd, char *path, char *);
+int execute_normal_mode(char *path, char *av);
 int format_pipe(char *, char **);
 int count_whitespace(char *str);
+void error_1_output(char *name, char *cmd);
 
 #endif /* MAIN_H */

@@ -1,5 +1,9 @@
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89
+
 valgrind --track-origins=yes ./a.out 
+
 echo "/bin/ls
 /bin/ls
 /bin/ls" | ./a.out
+
+echo "hbtn" | ./hsh
