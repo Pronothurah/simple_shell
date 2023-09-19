@@ -2,12 +2,10 @@
 
 /**
  * count_token - tokenizes an input string
- * 
  * @input: input string
- * 
- * Return: number of tokens 
-*/
-
+ *
+ * Return: number of tokens
+ */
 int count_token(char *input)
 {
 	char *copy;

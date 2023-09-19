@@ -19,14 +19,20 @@ void _print(const char *str);
 char *_strcpy(char *dest, const char *src);
 int _strcmp(const char *s1, const char *s2);
 char *_strcat(char *dest, const char *src);
+char *_strncpy(char *dest, const char *src, int n);
 char **parse_input(char *input, char *path, int len);
+int setup_arguments(char **args, char *input, char *delim, char *path);
+void check_for_executable(char **args, char *str, char *path);
 char *get_path_from_environ(const char *path, const char *s);
+char *find_executable(char *path, char *input);
 int count_token(char *input);
 char *custom_strdup(const char *str);
-void catch_ctrlc();
+void catch_ctrlc(int);
 void free_args(char **args);
-void __exit(char *input, char *path);
+void __exit(char *input, char *path, char **args);
 int execute(char *input, char *path, int length);
 int execute_pipe_mode(int fd, char *path);
+int format_pipe(char *, char **);
+int count_whitespace(char *str);
 
 #endif /* MAIN_H */

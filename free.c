@@ -1,12 +1,11 @@
 #include "main.h"
 
 /**
- * free_args - frees argument array 
+ * free_args - frees argument array
  * @args: array of arguments passed
- * 
- * Return: freed arguments
-*/
-
+ *
+ * Return: void
+ */
 void free_args(char **args)
 {
 	int i;
@@ -19,7 +18,15 @@ void free_args(char **args)
 	free(args);
 }
 
-void __exit(char *input, char *path)
+/**
+ * __exit - exit process
+ * @args: array of arguments passed
+ * @input: input read
+ * @path: global $PATH variable
+ *
+ * Return: void
+ */
+void __exit(char *input, char *path, char **args)
 {
 	free(input);
 	free(path);

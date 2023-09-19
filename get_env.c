@@ -3,10 +3,9 @@
 /**
  * _get_env - gets environment variable
  * @name: name of variable
- * 
+ *
  * Return: NULL
-*/
-
+ */
 char *_get_env(const char *name)
 {
 	int i;
@@ -20,6 +19,7 @@ char *_get_env(const char *name)
 		if (env_name != NULL && env_value != NULL && strcmp(env_name, name) == 0)
 		{
 			char *result = (char *)malloc(strlen(env_value) + 1);
+
 			if (result != NULL)
 			{
 				strcpy(result, env_value);
