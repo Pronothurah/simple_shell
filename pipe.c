@@ -11,7 +11,7 @@ int count_whitespace(char *str)
 	int count = 0;
 	int i;
 
-	if (str[0] == '\0' || str[1] == '\0')
+	if (str[0] == '\0')
 	{
 		return (-1);
 	}
@@ -71,46 +71,46 @@ int format_pipe(char *pipe, char **tokens)
  * execute_pipe_mode - implements the pipe operator
  * @fd: file descriptor from stdin
  * @path: path in global environment
+ * @av: argument vector
  *
  * Return: integer
  */
-int execute_pipe_mode(int fd, char *path)
+int execute_pipe_mode(int fd, char *path, char *av)
 {
-	char pipe[1024];
 	ssize_t bytesRead;
-	char *tmp;
-	char **tokens;
-	int len = 0, count = 0, i = 0, res;
-	int wc_count = 0;
+	char *tmp, **tokens, pipe[1024];
+	int len = 0, count = 0, i = 0, res, wc_count = 0;
 
 	bytesRead = read(fd, pipe, 1024);
 	if (bytesRead < 0)
 		return (1);
-
 	pipe[bytesRead] = '\0';
+
+	if (path == NULL && pipe[0] != '/')
+	{
+		free(path);
+		error_1_output(av, pipe);
+		return (127);
+	}
+
 	tokens = (char **)malloc(sizeof(char *) * 1024);
 	if (tokens == NULL)
 		return (1);
-
 	count = format_pipe(pipe, tokens);
 	for (i = 0; i < count && tokens[i]; i++)
 	{
 		tmp = custom_strdup(tokens[i]);
 		len = _strlen(tmp);
 		wc_count = count_whitespace(tmp);
-
 		if (wc_count == len || wc_count == -1)
 			return (0);
-
-		res = execute(tmp, path, len);
+		res = execute(tmp, path, len, av);
 		free(tmp);
 		free(tokens[i]);
-
 		if (res > 0)
 			return (res);
 	}
 
 	free(tokens);
-
 	return (res);
 }

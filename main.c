@@ -18,7 +18,7 @@ void catch_ctrlc(__attribute__((__unused__)) int sig)
  *
  * Return: exit status (int)
  */
-int execute_normal_mode(char *path)
+int execute_normal_mode(char *path, char *av)
 {
 	int flag = 0;
 	size_t len = 0;
@@ -39,7 +39,7 @@ int execute_normal_mode(char *path)
 
 	if (flag == 0)
 	{
-		flag = execute(input, path, byteRead);
+		flag = execute(input, path, byteRead, av);
 		free(input);
 	}
 
@@ -47,32 +47,27 @@ int execute_normal_mode(char *path)
 }
 
 /**
- * main - PID
+ * main - check code
+ * @ac: argument count
+ * @av: argument vector
  *
- * Return: Always 0.
+ * Return: int
  */
-int main(void)
+int main(__attribute__((__unused__)) int ac, char **av)
 {
 	char *path = _get_env("PATH");
 	int res = 0;
 
-	if (path == NULL)
-	{
-		free(path);
-		printf("Unable to launch\n");
-		return (1);
-	}
-
 	if (!isatty(STDIN_FILENO))
 	{
-		res = execute_pipe_mode(STDIN_FILENO, path);
+		res = execute_pipe_mode(STDIN_FILENO, path, av[0]);
 	}
 	else
 	{
 		signal(SIGINT, catch_ctrlc);
 		while (1)
 		{
-			res = execute_normal_mode(path);
+			res = execute_normal_mode(path, av[0]);
 			if (res == -1)
 				break;
 		}
