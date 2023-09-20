@@ -91,7 +91,7 @@ char **parse_input(char *input, __attribute__((__unused__)) int len)
 	char **args;
 	int i;
 
-	args = (char **)malloc((1024 + 1) * sizeof(*args));
+	args = (char **)malloc(1024 * sizeof(*args));
 	if (args == NULL)
 		return (NULL);
 
