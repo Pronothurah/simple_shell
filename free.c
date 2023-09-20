@@ -22,14 +22,12 @@ void free_args(char **args)
  * __exit - exit process
  * @args: array of arguments passed
  * @input: input read
- * @path: global $PATH variable
  *
  * Return: void
  */
-void __exit(char *input, char *path, char **args)
+void __exit(char *input, char **args)
 {
 	free(input);
-	free(path);
 	free_args(args);
 	exit(0);
 }
