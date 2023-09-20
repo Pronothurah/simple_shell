@@ -99,7 +99,7 @@ int execute_pipe_mode(int fd, char *av)
 		res = execute(tmp, len);
 		if (res > 0)
 		{
-			show_errors(res, av, tmp);
+			show_errors(res, av, tmp, 1);
 			return (res);
 		}
 		free(tmp);

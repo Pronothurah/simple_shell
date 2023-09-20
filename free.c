@@ -12,7 +12,10 @@ void free_args(char **args)
 
 	for (i = 0; args[i]; i++)
 	{
-		free(args[i]);
+		if (args[i])
+		{
+			free(args[i]);
+		}
 	}
 
 	free(args);
@@ -21,13 +24,11 @@ void free_args(char **args)
 /**
  * __exit - exit process
  * @args: array of arguments passed
- * @input: input read
  *
  * Return: void
  */
-void __exit(char *input, char **args)
+void __exit(char **args)
 {
-	free(input);
 	free_args(args);
 	exit(0);
 }

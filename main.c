@@ -42,7 +42,8 @@ int execute_normal_mode(char *av)
 		flag = execute(input, byteRead);
 		if (flag > 0)
 		{
-			show_errors(flag, av, input);
+			show_errors(flag, av, input, 2);
+			free(input);
 			return (flag);
 		}
 		free(input);

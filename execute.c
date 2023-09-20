@@ -17,7 +17,7 @@ int execute(char *input, int length)
 	if (args[0] == NULL)
 		flag = 127;
 	else if (_strcmp(args[0], "exit") == 0)
-		__exit(input, args);
+		__exit(args);
 	else
 	{
 		child_pid = fork();

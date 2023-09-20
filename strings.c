@@ -92,7 +92,7 @@ char *custom_strdup(const char *str)
 	}
 
 	len = _strlen(str);
-	duplicate = (char *)malloc(len + 1);
+	duplicate = (char *)malloc(len + 10);
 	if (duplicate == NULL)
 	{
 		return (NULL);
