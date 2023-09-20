@@ -21,7 +21,7 @@ char *find_executable(char *path, char *input)
 
 		if (dest == NULL)
 		{
-			free(dest);
+			free(result);
 			return (NULL);
 		}
 
@@ -32,19 +32,23 @@ char *find_executable(char *path, char *input)
 		_strcat(dest, input);
 		if (stat(dest, &sb) != -1)
 		{
-			result = (char *)malloc(sizeof(char) * _strlen(dest) + 1);
-			if (result == NULL)
+			char *temp = (char *)malloc(sizeof(char) * _strlen(dest) + 1);
+
+			if (temp == NULL)
 			{
 				free(result);
+				free(dest);
 				return (NULL);
 			}
-
-			_strcpy(result, dest);
+			_strcpy(temp, dest);
+			free(result);
+			result = temp;
 		}
+
+		free(dest);
 		s1 = strtok(NULL, ":");
 	}
 
-	free(dest);
 	return (result);
 }
 

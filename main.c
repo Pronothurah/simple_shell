@@ -25,7 +25,7 @@ int execute_normal_mode(char *av)
 	int byteRead = 0;
 	char *input = NULL;
 
-	_print("($) ");
+	_print("$ ");
 	byteRead = getline(&input, &len, stdin);
 	if (byteRead == -1)
 	{

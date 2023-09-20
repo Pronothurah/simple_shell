@@ -37,17 +37,15 @@ int count_whitespace(char *str)
 int format_pipe(char *pipe, char **tokens)
 {
 	int count = 0;
-	int i;
-	int length;
+	int i = 0, j = 0;
+	int length = 0;
 	int start = 0;
 	int index = 0;
 
 	for (i = 0; pipe[i]; i++)
 	{
 		if (pipe[i] == '\n')
-		{
 			count++;
-		}
 	}
 
 	for (i = 0; pipe[i]; i++)
@@ -56,7 +54,13 @@ int format_pipe(char *pipe, char **tokens)
 		{
 			length = i - start;
 			tokens[index] = (char *)malloc(length + 1);
-
+			if (tokens[index] == NULL)
+			{
+				for (j = 0; j < index; j++)
+					free(tokens[j]);
+				free(tokens);
+				return (0);
+			}
 			_strncpy(tokens[index], pipe + start, length);
 			tokens[index][length] = '\0';
 			index++;
