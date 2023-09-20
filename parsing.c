@@ -23,6 +23,7 @@ void check_for_executable(char **args, char *str, char *path)
 		}
 		else
 		{
+			free(args[0]);
 			args[0] = NULL;
 		}
 
@@ -40,11 +41,9 @@ void check_for_executable(char **args, char *str, char *path)
  */
 int setup_arguments(char **args, char *input, char *delim)
 {
-	char *s;
-	char *str;
+	char *s, *str, *path;
 	struct stat sb;
 	int i = 0;
-	char *path;
 
 	s = strtok(input, delim);
 	str = NULL;
@@ -97,6 +96,12 @@ char **parse_input(char *input, __attribute__((__unused__)) int len)
 
 	delimeter = custom_strdup(" \n\t\r");
 	i = setup_arguments(args, input, delimeter);
+
+	if (args == NULL)
+	{
+		free(delimeter);
+		return (NULL);
+	}
 
 	if (i > 0)
 		args[i] = NULL;
