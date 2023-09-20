@@ -15,7 +15,7 @@ void show_errors(int status, char *name, char *cmd, int mode)
 	{
 		error_1_output(name, cmd, "not found");
 	}
-	else if (status == 126)
+	else if (status == 126 || status == 13)
 	{
 		error_1_output(name, cmd, "Permission denied");
 	}

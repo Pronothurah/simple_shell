@@ -18,13 +18,11 @@ char *find_executable(char *path, char *input)
 	{
 		dest_len = _strlen(s1) + _strlen(input) + 2;
 		dest = (char *)malloc(dest_len);
-
 		if (dest == NULL)
 		{
 			free(result);
 			return (NULL);
 		}
-
 		_strcpy(dest, s1);
 		if (dest[_strlen(dest) - 1] != '/')
 			_strcat(dest, "/");
@@ -44,11 +42,9 @@ char *find_executable(char *path, char *input)
 			free(result);
 			result = temp;
 		}
-
 		free(dest);
 		s1 = strtok(NULL, ":");
 	}
-
 	return (result);
 }
 

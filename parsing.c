@@ -44,7 +44,7 @@ int setup_arguments(char **args, char *input, char *delim)
 	char *str;
 	struct stat sb;
 	int i = 0;
-	char *path;
+	char *path, *tmp;
 
 	s = strtok(input, delim);
 	str = NULL;
@@ -68,7 +68,9 @@ int setup_arguments(char **args, char *input, char *delim)
 
 	for (i = 0; s != NULL; i++)
 	{
-		args[i] = custom_strdup(s);
+		tmp = custom_strdup(s);
+		args[i] = tmp;
+		free(tmp);
 		s = strtok(NULL, delim);
 	}
 
@@ -91,7 +93,7 @@ char **parse_input(char *input, __attribute__((__unused__)) int len)
 	char **args;
 	int i;
 
-	args = (char **)malloc((1024 + 1) * sizeof(*args));
+	args = (char **)malloc(1024 * sizeof(*args));
 	if (args == NULL)
 		return (NULL);
 

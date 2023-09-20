@@ -99,17 +99,24 @@ int execute_pipe_mode(int fd, char *av)
 		len = _strlen(tmp);
 		wc_count = count_whitespace(tmp);
 		if (wc_count == len || wc_count == -1)
+		{
+			free(tmp);
+			free(tokens[i]);
+			free(tokens);
 			return (0);
+		}
 		res = execute(tmp, len);
 		if (res > 0)
 		{
 			show_errors(res, av, tmp, 1);
+			free(tmp);
+			free(tokens[i]);
+			free(tokens);
 			return (res);
 		}
 		free(tmp);
 		free(tokens[i]);
 	}
-
 	free(tokens);
 	return (res);
 }

@@ -8,8 +8,8 @@
  */
 void catch_ctrlc(__attribute__((__unused__)) int sig)
 {
-	_putchar('\n');
-	exit(0);
+	signal(SIGINT, catch_ctrlc);
+	_print("\n$ ");
 }
 
 /**
