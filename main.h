@@ -39,7 +39,7 @@ void show_errors(int status, char *name, char *cmd);
 int execute_normal_mode(char *);
 int format_pipe(char *, char **);
 int count_whitespace(char *str);
-void error_1_output(char *name, char *cmd);
+void error_1_output(char *name, char *cmd, char *text);
 char *_strtok(char *src, char *delim);
 unsigned int is_delim(char c, char *delim);
 

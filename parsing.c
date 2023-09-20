@@ -47,7 +47,7 @@ int setup_arguments(char **args, char *input, char *delim)
 
 	s = strtok(input, delim);
 	str = NULL;
-	if (s[0] == '/')
+	if (s[0] == '/' || s[0] == '.')
 	{
 		if (stat(s, &sb) == -1)
 		{
