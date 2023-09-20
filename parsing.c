@@ -20,6 +20,10 @@ void check_for_executable(char **args, char *str, char *path)
 			strcpy(args[0], tmp);
 			free(tmp);
 		}
+		else
+		{
+			args[0] = NULL;
+		}
 
 		free(str);
 	}
@@ -29,21 +33,20 @@ void check_for_executable(char **args, char *str, char *path)
  * setup_arguments - setup arguments
  * @args: pointer to array of strings
  * @input: input string
- * @path: path in global environment
  * @delim: input delimeter
  *
  * Return: integer
  */
-int setup_arguments(char **args, char *input, char *delim, char *path)
+int setup_arguments(char **args, char *input, char *delim)
 {
 	char *s;
-	/*char *str;*/
+	char *str;
 	struct stat sb;
 	int i;
+	char *path;
 
-	(void)path;
 	s = strtok(input, delim);
-	/*str = NULL;*/
+	str = NULL;
 	if (s[0] == '/')
 	{
 		if (stat(s, &sb) == -1)
@@ -59,7 +62,7 @@ int setup_arguments(char **args, char *input, char *delim, char *path)
 	}
 	else
 	{
-		/*str = custom_strdup(s);*/
+		str = custom_strdup(s);
 	}
 
 	for (i = 0; s != NULL; i++)
@@ -68,19 +71,20 @@ int setup_arguments(char **args, char *input, char *delim, char *path)
 		s = strtok(NULL, delim);
 	}
 
-	/* check_for_executable(args, str, path); */
+	path = _get_env("PATH");
+	check_for_executable(args, str, path);
+	free(path);
 	return (i);
 }
 
 /**
  * parse_input - splits the input
  * @input: input string
- * @p: path in global environment
  * @len: length of string
  *
  * Return: array of strings
  */
-char **parse_input(char *input, char *p, __attribute__((__unused__)) int len)
+char **parse_input(char *input, __attribute__((__unused__)) int len)
 {
 	char *delimeter;
 	char **args;
@@ -95,12 +99,11 @@ char **parse_input(char *input, char *p, __attribute__((__unused__)) int len)
 		return (NULL);
 
 	delimeter = custom_strdup(" \n\t\r");
-	i = setup_arguments(args, input, delimeter, p);
+	i = setup_arguments(args, input, delimeter);
 
 	if (i > 0)
 		args[i] = NULL;
 
 	free(delimeter);
-
 	return (args);
 }

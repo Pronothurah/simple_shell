@@ -8,18 +8,16 @@
  */
 void catch_ctrlc(__attribute__((__unused__)) int sig)
 {
-	printf("\n");
+	_putchar('\n');
 	exit(0);
 }
 
 /**
  * execute_normal_mode - interactive mode
- * @path: current $PATH env
- * @av: argument vector
  *
  * Return: exit status (int)
  */
-int execute_normal_mode(char *path, char *av)
+int execute_normal_mode(void)
 {
 	int flag = 0;
 	size_t len = 0;
@@ -40,7 +38,7 @@ int execute_normal_mode(char *path, char *av)
 
 	if (flag == 0)
 	{
-		flag = execute(input, path, byteRead, av);
+		flag = execute(input, byteRead);
 		free(input);
 	}
 
@@ -56,24 +54,27 @@ int execute_normal_mode(char *path, char *av)
  */
 int main(__attribute__((__unused__)) int ac, char **av)
 {
-	char *path = _get_env("PATH");
 	int res = 0;
 
 	if (!isatty(STDIN_FILENO))
 	{
-		res = execute_pipe_mode(STDIN_FILENO, path, av[0]);
+		res = execute_pipe_mode(STDIN_FILENO);
+		if (res > 0)
+			perror(av[0]);
 	}
 	else
 	{
 		signal(SIGINT, catch_ctrlc);
 		while (1)
 		{
-			res = execute_normal_mode(path, av[0]);
+			res = execute_normal_mode();
 			if (res == -1)
 				break;
+
+			if (res > 0)
+				perror(av[0]);
 		}
 	}
 
-	free(path);
 	return (res);
 }
