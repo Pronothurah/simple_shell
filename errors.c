@@ -12,7 +12,11 @@ void show_errors(int status, char *name, char *cmd)
 {
 	if (status == 127)
 	{
-		error_1_output(name, cmd);
+		error_1_output(name, cmd, "not found");
+	}
+	else if (status == 126)
+	{
+		error_1_output(name, cmd, "Permission denied");
 	}
 }
 
@@ -20,10 +24,11 @@ void show_errors(int status, char *name, char *cmd)
  * error_1_output - prints not found error
  * @name: name of the program
  * @cmd: name of the command
+ * @text: output text
  *
  * Return: void
  */
-void error_1_output(char *name, char *cmd)
+void error_1_output(char *name, char *cmd, char *text)
 {
 	int i;
 
@@ -39,7 +44,9 @@ void error_1_output(char *name, char *cmd)
 	}
 
 	_print_error(cmd);
-	_print_error(": not found\n");
+	_print_error(": ");
+	_print_error(text);
+	_print_error("\n");
 }
 
 /**
