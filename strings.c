@@ -83,7 +83,7 @@ int _strcmp(const char *s1, const char *s2)
  */
 char *custom_strdup(const char *str)
 {
-	char *duplicate;
+	char *duplicate = NULL;
 	size_t len;
 
 	if (str == NULL)
@@ -92,7 +92,7 @@ char *custom_strdup(const char *str)
 	}
 
 	len = _strlen(str);
-	duplicate = (char *)malloc(len + 10);
+	duplicate = (char *)malloc(len + 1);
 	if (duplicate == NULL)
 	{
 		return (NULL);

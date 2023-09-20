@@ -17,7 +17,8 @@ void check_for_executable(char **args, char *str, char *path)
 		tmp = get_path_from_environ(path, str);
 		if (tmp != NULL)
 		{
-			_strcpy(args[0], tmp);
+			free(args[0]);
+			args[0] = custom_strdup(tmp);
 			free(tmp);
 		}
 		else
