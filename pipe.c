@@ -41,6 +41,13 @@ int format_pipe(char *pipe, char **tokens)
 	int length = 0;
 	int start = 0;
 	int index = 0;
+	int wc;
+
+	wc = count_whitespace(pipe);
+	if (wc == -1 || (wc == _strlen(pipe)))
+	{
+		return (0);
+	}
 
 	for (i = 0; pipe[i]; i++)
 	{
@@ -82,7 +89,7 @@ int execute_pipe_mode(int fd, char *av)
 {
 	ssize_t bytesRead;
 	char *tmp, **tokens, pipe[1024];
-	int len = 0, count = 0, i = 0, res, wc_count = 0;
+	int len = 0, count = 0, i = 0, res = 0, wc_count = 0;
 
 	bytesRead = read(fd, pipe, 1024);
 	if (bytesRead < 0)
