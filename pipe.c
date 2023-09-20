@@ -70,10 +70,11 @@ int format_pipe(char *pipe, char **tokens)
 /**
  * execute_pipe_mode - implements the pipe operator
  * @fd: file descriptor from stdin
+ * @av: argument vector
  *
  * Return: integer
  */
-int execute_pipe_mode(int fd)
+int execute_pipe_mode(int fd, char *av)
 {
 	ssize_t bytesRead;
 	char *tmp, **tokens, pipe[1024];
@@ -96,6 +97,11 @@ int execute_pipe_mode(int fd)
 		if (wc_count == len || wc_count == -1)
 			return (0);
 		res = execute(tmp, len);
+		if (res > 0)
+		{
+			show_errors(res, av, tmp);
+			return (res);
+		}
 		free(tmp);
 		free(tokens[i]);
 	}

@@ -29,7 +29,7 @@ int execute(char *input, int length)
 
 		if (child_pid == 0)
 		{
-			execve(args[0], args, __environ);
+			execve(args[0], args, environ);
 			return (errno);
 		}
 		else

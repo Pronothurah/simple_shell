@@ -1,6 +1,22 @@
 #include "main.h"
 
 /**
+ * show_errors - global error manager
+ * @name: name of the program
+ * @cmd: name of the command
+ * @status: status of the program
+ *
+ * Return: void
+ */
+void show_errors(int status, char *name, char *cmd)
+{
+	if (status == 127)
+	{
+		error_1_output(name, cmd);
+	}
+}
+
+/**
  * error_1_output - prints not found error
  * @name: name of the program
  * @cmd: name of the command

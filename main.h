@@ -12,6 +12,8 @@
 #include <signal.h>
 #include <errno.h>
 
+extern char **environ;
+
 char *_get_env(const char *name);
 int _putchar(char c);
 int _strlen(const char *str);
@@ -32,8 +34,9 @@ void catch_ctrlc(int);
 void free_args(char **args);
 void __exit(char *input, char **args);
 int execute(char *input, int length);
-int execute_pipe_mode(int fd);
-int execute_normal_mode();
+int execute_pipe_mode(int fd, char *);
+void show_errors(int status, char *name, char *cmd);
+int execute_normal_mode(char *);
 int format_pipe(char *, char **);
 int count_whitespace(char *str);
 void error_1_output(char *name, char *cmd);

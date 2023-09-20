@@ -42,7 +42,7 @@ int setup_arguments(char **args, char *input, char *delim)
 	char *s;
 	char *str;
 	struct stat sb;
-	int i;
+	int i = 0;
 	char *path;
 
 	s = strtok(input, delim);
