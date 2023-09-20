@@ -37,12 +37,13 @@ void check_for_executable(char **args, char *str, char *path)
 int setup_arguments(char **args, char *input, char *delim, char *path)
 {
 	char *s;
-	char *str;
+	/*char *str;*/
 	struct stat sb;
 	int i;
 
+	(void)path;
 	s = strtok(input, delim);
-	str = NULL;
+	/*str = NULL;*/
 	if (s[0] == '/')
 	{
 		if (stat(s, &sb) == -1)
@@ -58,7 +59,7 @@ int setup_arguments(char **args, char *input, char *delim, char *path)
 	}
 	else
 	{
-		str = custom_strdup(s);
+		/*str = custom_strdup(s);*/
 	}
 
 	for (i = 0; s != NULL; i++)
@@ -67,7 +68,7 @@ int setup_arguments(char **args, char *input, char *delim, char *path)
 		s = strtok(NULL, delim);
 	}
 
-	check_for_executable(args, str, path);
+	/* check_for_executable(args, str, path); */
 	return (i);
 }
 

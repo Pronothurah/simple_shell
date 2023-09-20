@@ -9,7 +9,9 @@
  */
 int not_found_error(char *name, char *cmd)
 {
-	error_1_output(name, cmd);
+	/*error_1_output(name, cmd);*/
+	(void)cmd;
+	perror(name);
 	return (127);
 }
 
@@ -29,7 +31,7 @@ int execute(char *input, char *path, int length, char *av)
 	int status, flag = 0;
 
 	args = parse_input(input, path, length);
-	if (args[0] == NULL)
+	if (args[0] == NULL || args[1])
 		return (not_found_error(av, input));
 	else if (_strcmp(args[0], "exit") == 0)
 		__exit(input, path, args);
