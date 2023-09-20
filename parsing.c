@@ -44,7 +44,7 @@ int setup_arguments(char **args, char *input, char *delim)
 	char *str;
 	struct stat sb;
 	int i = 0;
-	char *path, *tmp;
+	char *path;
 
 	s = strtok(input, delim);
 	str = NULL;
@@ -68,9 +68,7 @@ int setup_arguments(char **args, char *input, char *delim)
 
 	for (i = 0; s != NULL; i++)
 	{
-		tmp = custom_strdup(s);
-		args[i] = tmp;
-		free(tmp);
+		args[i] = custom_strdup(s);
 		s = strtok(NULL, delim);
 	}
 
