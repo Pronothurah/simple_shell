@@ -16,13 +16,13 @@ char *_get_env(const char *name)
 		char *env_name = strtok(env_var, "=");
 		char *env_value = strtok(NULL, "=");
 
-		if (env_name != NULL && env_value != NULL && strcmp(env_name, name) == 0)
+		if (env_name != NULL && env_value != NULL && _strcmp(env_name, name) == 0)
 		{
-			char *result = (char *)malloc(strlen(env_value) + 1);
+			char *result = (char *)malloc(_strlen(env_value) + 1);
 
 			if (result != NULL)
 			{
-				strcpy(result, env_value);
+				_strcpy(result, env_value);
 				free(env_var);
 				return (result);
 			}
