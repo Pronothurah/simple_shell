@@ -14,10 +14,11 @@ void catch_ctrlc(__attribute__((__unused__)) int sig)
 
 /**
  * execute_normal_mode - interactive mode
+ * @av: argument vector
  *
  * Return: exit status (int)
  */
-int execute_normal_mode(void)
+int execute_normal_mode(char *av)
 {
 	int flag = 0;
 	size_t len = 0;
@@ -39,6 +40,11 @@ int execute_normal_mode(void)
 	if (flag == 0)
 	{
 		flag = execute(input, byteRead);
+		if (flag > 0)
+		{
+			show_errors(flag, av, input);
+			return (flag);
+		}
 		free(input);
 	}
 
@@ -58,21 +64,16 @@ int main(__attribute__((__unused__)) int ac, char **av)
 
 	if (!isatty(STDIN_FILENO))
 	{
-		res = execute_pipe_mode(STDIN_FILENO);
-		if (res > 0)
-			perror(av[0]);
+		res = execute_pipe_mode(STDIN_FILENO, av[0]);
 	}
 	else
 	{
 		signal(SIGINT, catch_ctrlc);
 		while (1)
 		{
-			res = execute_normal_mode();
+			res = execute_normal_mode(av[0]);
 			if (res == -1)
 				break;
-
-			if (res > 0)
-				perror(av[0]);
 		}
 	}
 

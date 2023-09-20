@@ -10,9 +10,9 @@ char *_get_env(const char *name)
 {
 	int i;
 
-	for (i = 0; __environ[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++)
 	{
-		char *env_var = custom_strdup(__environ[i]);
+		char *env_var = custom_strdup(environ[i]);
 		char *env_name = strtok(env_var, "=");
 		char *env_value = strtok(NULL, "=");
 
