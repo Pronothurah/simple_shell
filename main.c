@@ -30,7 +30,7 @@ int execute_normal_mode(char *av)
 	if (byteRead == -1)
 	{
 		free(input);
-		printf("\n");
+		_print("\n");
 		return (-1);
 	}
 
