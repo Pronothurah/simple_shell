@@ -17,7 +17,7 @@ void check_for_executable(char **args, char *str, char *path)
 		tmp = get_path_from_environ(path, str);
 		if (tmp != NULL)
 		{
-			strcpy(args[0], tmp);
+			_strcpy(args[0], tmp);
 			free(tmp);
 		}
 		else
@@ -55,7 +55,7 @@ int setup_arguments(char **args, char *input, char *delim)
 			return (0);
 		}
 	}
-	else if (strcmp(s, "exit") == 0)
+	else if (_strcmp(s, "exit") == 0)
 	{
 		args[0] = custom_strdup("exit");
 		return (0);
