@@ -5,18 +5,23 @@
  * @name: name of the program
  * @cmd: name of the command
  * @status: status of the program
+ * @mode: shell mode (normal | pipe)
  *
  * Return: void
  */
-void show_errors(int status, char *name, char *cmd)
+void show_errors(int status, char *name, char *cmd, int mode)
 {
-	if (status == 127)
+	if (status == 127 && mode == 1)
 	{
 		error_1_output(name, cmd, "not found");
 	}
 	else if (status == 126)
 	{
 		error_1_output(name, cmd, "Permission denied");
+	}
+	else if (status == 127 && mode == 2)
+	{
+		error_1_output(name, cmd, "No such file or directory");
 	}
 }
 

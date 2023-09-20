@@ -88,13 +88,9 @@ char **parse_input(char *input, __attribute__((__unused__)) int len)
 {
 	char *delimeter;
 	char **args;
-	int c, i;
+	int i;
 
-	c = count_token(input);
-	if (c == -1)
-		return (NULL);
-
-	args = (char **)malloc((c + 1) * sizeof(*args));
+	args = (char **)malloc((1024 + 1) * sizeof(*args));
 	if (args == NULL)
 		return (NULL);
 
