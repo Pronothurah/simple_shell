@@ -12,7 +12,7 @@
 - The command lines are made only of one word. No arguments will be passed to programs.
 - If an executable cannot be found, print an error message and display the prompt again.
 - Handle errors.
-- You have to handle the “end of file” condition (Ctrl+D)
+- You have to handle the “end of file” condition (`Ctrl+D`)
 
 *execve will be the core part of your Shell, don’t forget to pass the environ to it…*
 
@@ -56,62 +56,3 @@
 
 - You are not allowed to use strtok
 
-## TASK 8
-
-*8. Simple shell 0.4.1*
-
-- handle arguments for the built-in `exit`
-
-## TASK 9
-
-*9. setenv, unsetenv*
-
-- Implement the `setenv` and `unsetenv` builtin commands
-
-## TASK 10
-
-*10. cd*
-
-- Implement the builtin command `cd`:
-
-## TASK 11
-
-*11. ;*
-
-- Handle the commands separator ;
-
-## TASK 12
-
-*12. && and ||*
-
-- Handle the && and || shell logical operators
-
-## TASK 13
-
-*13. alias*
-
-- Implement the alias builtin command
-
-## TASK 14
-
-*14.Variables*
-
-- Handle variables replacement
-- Handle the `$?` variable
-- Handle the `$$` variable
-
-## TASK 15
-
-*15. Comments*
-
-- Handle comments (`#`)
-
-## TASK 16
-
-*16. File as input*
-
-- Usage: `simple_shell [filename]`
-- Your shell can take a file as a command line argument
-- The file contains all the commands that your shell should run before exiting
-- The file should contain one command per line
-- In this mode, the shell should not print a prompt and should not read from `stdin`
