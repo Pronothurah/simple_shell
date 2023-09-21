@@ -1,6 +1,21 @@
 #include "main.h"
 
 /**
+ * free_tokens - frees arguments
+ * @tokens: array of arguments passed
+ * @tmp: input string
+ * @i: index
+ *
+ * Return: void
+ */
+void free_tokens(char **tokens, char *tmp, int i)
+{
+	free(tmp);
+	free(tokens[i]);
+	free(tokens);
+}
+
+/**
  * free_args - frees argument array
  * @args: array of arguments passed
  *
@@ -8,13 +23,7 @@
  */
 void free_args(char **args)
 {
-	int i;
-
-	for (i = 0; args[i]; i++)
-	{
-		free(args[i]);
-	}
-
+	free(*args);
 	free(args);
 }
 

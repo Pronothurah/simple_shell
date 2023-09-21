@@ -94,7 +94,7 @@ char **parse_input(char *input, __attribute__((__unused__)) int len)
 	if (args == NULL)
 		return (NULL);
 
-	delimeter = custom_strdup(" \n\t\r");
+	delimeter = custom_strdup(" \n\t\r\a");
 	i = setup_arguments(args, input, delimeter);
 
 	if (args == NULL)

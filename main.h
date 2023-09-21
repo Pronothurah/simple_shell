@@ -32,6 +32,7 @@ int count_token(char *input);
 char *custom_strdup(const char *str);
 void catch_ctrlc(int);
 void free_args(char **args);
+void free_tokens(char **tokens, char *tmp, int i);
 void __exit(char **args);
 int execute(char *input, int length);
 int execute_pipe_mode(int fd, char *);

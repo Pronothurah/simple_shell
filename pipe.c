@@ -96,7 +96,7 @@ int execute_pipe_mode(int fd, char *av)
 		return (1);
 	pipe[bytesRead] = '\0';
 
-	tokens = (char **)malloc(sizeof(char *) * 1024);
+	tokens = (char **)malloc(sizeof(char *) * bytesRead);
 	if (tokens == NULL)
 		return (1);
 	count = format_pipe(pipe, tokens);
@@ -107,18 +107,16 @@ int execute_pipe_mode(int fd, char *av)
 		wc_count = count_whitespace(tmp);
 		if (wc_count == len || wc_count == -1)
 		{
-			free(tmp);
-			free(tokens[i]);
-			free(tokens);
+			free_tokens(tokens, tmp, i);
 			return (0);
 		}
+		if (_strcmp(tmp, "exit") == 0)
+			free_args(tokens);
 		res = execute(tmp, len);
 		if (res > 0)
 		{
 			show_errors(res, av, tmp, 1);
-			free(tmp);
-			free(tokens[i]);
-			free(tokens);
+			free_tokens(tokens, tmp, i);
 			return (res);
 		}
 		free(tmp);
