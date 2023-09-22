@@ -3,6 +3,7 @@
 /**
  * free_args_by_index - frees argument array by index
  * @args: array of arguments passed
+ * @count: argument count
  *
  * Return: void
  */
