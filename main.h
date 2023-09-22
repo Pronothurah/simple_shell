@@ -25,7 +25,7 @@ char *_strcat(char *dest, const char *src);
 char *_strncpy(char *dest, const char *src, int n);
 char **parse_input(char *input, int len);
 int setup_arguments(char **args, char *input, char *delim);
-void check_for_executable(char **args, char *str, char *path);
+void check_for_executable(char **args, char *str, char *path, int index);
 char *get_path_from_environ(const char *path, const char *s);
 char *find_executable(char *path, char *input);
 int count_token(char *input);
