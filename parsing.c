@@ -5,10 +5,11 @@
  * @args: pointer to array of strings
  * @str: input string
  * @path: path in global environment
+ * @index: current element index
  *
  * Return: void
  */
-void check_for_executable(char **args, char *str, char *path)
+void check_for_executable(char **args, char *str, char *path, int index)
 {
 	char *tmp;
 
@@ -24,6 +25,8 @@ void check_for_executable(char **args, char *str, char *path)
 		else
 		{
 			free(args[0]);
+			if (index > 1)
+				free(args[1]);
 			args[0] = NULL;
 		}
 
@@ -72,7 +75,7 @@ int setup_arguments(char **args, char *input, char *delim)
 	}
 
 	path = _get_env("PATH");
-	check_for_executable(args, str, path);
+	check_for_executable(args, str, path, i);
 	free(path);
 	return (i);
 }

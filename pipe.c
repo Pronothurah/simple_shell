@@ -45,15 +45,11 @@ int format_pipe(char *pipe, char **tokens)
 
 	wc = count_whitespace(pipe);
 	if (wc == -1 || (wc == _strlen(pipe)))
-	{
 		return (0);
-	}
 
 	for (i = 0; pipe[i]; i++)
-	{
 		if (pipe[i] == '\n')
 			count++;
-	}
 
 	for (i = 0; pipe[i]; i++)
 	{
@@ -116,7 +112,7 @@ int execute_pipe_mode(int fd, char *av)
 		{
 			show_errors(res, av, tmp, 1);
 			free(tmp);
-			free_args_by_index(tokens, i + 1);
+			free_args_by_index(tokens, count - 1);
 			return (res);
 		}
 		free(tmp);
