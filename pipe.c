@@ -108,17 +108,15 @@ int execute_pipe_mode(int fd, char *av)
 		if (wc_count == len || wc_count == -1)
 		{
 			free(tmp);
-			free(tokens[i]);
-			free(tokens);
+			free_args_by_index(tokens, i);
 			return (0);
 		}
-		res = execute(tmp, len);
+		res = execute(tmp, len, tokens);
 		if (res > 0)
 		{
 			show_errors(res, av, tmp, 1);
 			free(tmp);
-			free(tokens[i]);
-			free(tokens);
+			free_args_by_index(tokens, i + 1);
 			return (res);
 		}
 		free(tmp);
