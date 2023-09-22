@@ -39,7 +39,7 @@ int execute_normal_mode(char *av)
 
 	if (flag == 0)
 	{
-		flag = execute(input, byteRead);
+		flag = execute(input, byteRead, NULL);
 		if (flag > 0)
 		{
 			show_errors(flag, av, input, 2);
